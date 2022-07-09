@@ -1,0 +1,81 @@
+﻿@model IEnumerable<SingaTest.ViewModels.DetailsView>
+
+@{
+    ViewBag.Title = "Home Page";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 10);
+}
+
+<hr />
+<table class="table table-bordered table-hover" id="datatable">
+    <thead>
+        <tr>
+            <th>
+                E-CS
+            </th>
+            <th>
+                B.Cat
+            </th>
+            <th>
+                Series
+            </th>
+            <th>
+                Jan
+            </th>
+            <th>
+                Feb
+            </th>
+            <th>
+                Mar
+            </th>
+            <th>
+                Apr
+            </th>
+            <th>
+                May
+            </th>
+            <th>
+                Jun
+            </th>
+            <th>
+                Jul
+            </th>
+            <th>
+                Aug
+            </th>
+            <th>
+                Sep
+            </th>
+            <th>
+                Oct
+            </th>
+            <th>
+                Nov
+            </th>
+            <th>
+                Dec
+            </th>
+        </tr>
+    </thead>
+    <tbody class="tbody" id="tblbody">
+        @foreach (var item in Model)
+            {
+        <tr>
+            <td class="EcsName">
+                <span>@item.Ecs</span>
+            </td>
+            <td class="EcsName">
+                <span>@item.Bcat</span>
+            </td>
+            <td class="EcsName">
+                <span>@item.Series</span>
+            </td>
+            <td class="Jan">
+                <span>@item.Jan</span>
+            </td>
+
+
+        </tr>
+            }
+    </tbody>
+
+</table>
