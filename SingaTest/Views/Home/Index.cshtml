@@ -2,80 +2,220 @@
 
 @{
     ViewBag.Title = "Home Page";
-    WebGrid grid = new WebGrid(Model, rowsPerPage: 10);
 }
 
 <hr />
-<table class="table table-bordered table-hover" id="datatable">
-    <thead>
+
+<button id="editBtn" onclick="editRows()">Edit</button>
+<button id="saveBtn" onclick="saveData()" hidden>Save</button>
+<br />
+<br />
+
+<table class="table table-bordered table-hover" id="datatable" border="1">
+    <thead style="background-color: paleturquoise">
         <tr>
-            <th>
-                E-CS
-            </th>
-            <th>
-                B.Cat
-            </th>
-            <th>
-                Series
-            </th>
-            <th>
-                Jan
-            </th>
-            <th>
-                Feb
-            </th>
-            <th>
-                Mar
-            </th>
-            <th>
-                Apr
-            </th>
-            <th>
-                May
-            </th>
-            <th>
-                Jun
-            </th>
-            <th>
-                Jul
-            </th>
-            <th>
-                Aug
-            </th>
-            <th>
-                Sep
-            </th>
-            <th>
-                Oct
-            </th>
-            <th>
-                Nov
-            </th>
-            <th>
-                Dec
-            </th>
+            <th> E-CS </th>
+            <th> B.Cat </th>
+            <th> Series </th>
+            <th> Jan </th>
+            <th> Feb </th>
+            <th> Mar </th>
+            <th> Apr </th>
+            <th> May </th>
+            <th> Jun </th>
+            <th> Jul </th>
+            <th> Aug </th>
+            <th> Sep </th>
+            <th> Oct </th>
+            <th> Nov </th>
+            <th> Dec </th>
+
+            <th>Total</th>
         </tr>
     </thead>
     <tbody class="tbody" id="tblbody">
         @foreach (var item in Model)
-            {
-        <tr>
-            <td class="EcsName">
-                <span>@item.Ecs</span>
-            </td>
-            <td class="EcsName">
-                <span>@item.Bcat</span>
-            </td>
-            <td class="EcsName">
-                <span>@item.Series</span>
-            </td>
-            <td class="Jan">
-                <span>@item.Jan</span>
-            </td>
+        {
+            <tr>
+                <td hidden>
+                    <input type="text" disabled id="monthId" size="1" value="@(item.MonthId)" />
+                </td>
+                <td class="EcsNameId">
+                    <span>@item.Ecs</span>
+                </td>
+                <td class="EcsNameId">
+                    <span>@item.Bcat</span>
+                </td>
+                <td class="EcsNameId">
+                    <span>@item.Series</span>
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 1 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m1" size="1" value="@(item.Jan)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 2 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m2" size="1" value="@(item.Feb)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 3 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m3" size="1" value="@(item.March)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 4 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m4" size="1" value="@(item.April)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 5 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m5" size="1" value="@(item.May)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 6 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m6" size="1" value="@(item.June)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 7 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m7" size="1" value="@(item.July)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 8 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m8" size="1" value="@(item.August)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 9 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m9" size="1" value="@(item.September)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 10 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m10" size="1" value="@(item.October)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 11 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m11" size="1" value="@(item.November)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <input type="text" class="@(System.DateTime.Now.Month <= 12 ? "ActiveMonth" : "")"
+                           disabled id="@(item.MonthId)Month-m12" size="1" value="@(item.December)" onchange="getRowTotal(@item.MonthId)" />
+                </td>
+                <td>
+                    <span id="totalRow@(item.MonthId)" size="1">@(item.Total)</span>
+                </td>
 
 
-        </tr>
-            }
+            </tr>
+        }
     </tbody>
-
+    @Html.AntiForgeryToken()
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </table>
+
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+
+    $(document).ready(function () {
+
+
+
+    });
+
+    var data = [];
+    var monthList = [];
+
+
+    function getRowTotal(rowNo) {
+
+        var total = 0;
+
+        for (var i = 1; i <= 12; i++) {
+            console.log($('#' + rowNo + 'Month-m' + i).val());
+            total = total + parseInt($('#' + rowNo + 'Month-m' + i).val());
+
+        }
+
+        $("#totalRow" + rowNo).text(total);
+    }
+
+    function editRows() {
+
+
+        $('#editBtn').prop('hidden',true);
+        $('#saveBtn').removeAttr('hidden');
+
+        $('.ActiveMonth').prop('disabled', false);
+
+    }
+
+    function findCellValues() {
+
+        $("#tblbody td").find('input[type=text]').each(function (id, value) {
+
+            data.push(this.value);
+
+        });
+    }
+
+    function manipulateData() {
+
+        debugger;
+
+        let counter = data.length / 13;
+        let x = 0;
+        let y = 13;
+
+        for (let i = 0; i < counter; i++) {
+
+            const SlicedArray = data.slice(x, y);
+
+            var MonthInfo = {
+                MonthId: SlicedArray[0],
+                Jan: SlicedArray[1],
+                Feb: SlicedArray[2],
+                March: SlicedArray[3],
+                April: SlicedArray[4],
+                May: SlicedArray[5],
+                June: SlicedArray[6],
+                July: SlicedArray[7],
+                August: SlicedArray[8],
+                September: SlicedArray[9],
+                October: SlicedArray[10],
+                November: SlicedArray[11],
+                December: SlicedArray[12]
+            }
+
+            monthList.push(MonthInfo);
+
+            x = x + 13;
+            y = y + 13;
+        }
+
+        console.log(MonthInfo);
+    }
+
+    function saveData() {
+
+
+        findCellValues();
+        manipulateData();
+
+        $.ajax({
+            url: '@Url.Content("~/Home/UpdateMonthData")',
+            data: JSON.stringify(monthList),
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (result) {
+                console.log("Success");
+            }
+        })
+
+        }
+
+
+</script>
+

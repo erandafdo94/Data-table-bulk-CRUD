@@ -7,6 +7,7 @@ namespace SingaTest.ViewModels
 {
     public class DetailsView
     {
+        public int MonthId { get; set; }
         public string Ecs { get; set; }
         public string Bcat { get; set; }
         public string Series { get; set; }
@@ -22,5 +23,6 @@ namespace SingaTest.ViewModels
         public int October { get; set; }
         public int November { get; set; }
         public int December { get; set; }
+        public int Total { get; set; }
     }
 }
