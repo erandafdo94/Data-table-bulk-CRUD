@@ -7,6 +7,6 @@
 5. Seed data using seeddata.sql found on script folder.
 
 Used : 
-VS 2019 
-.net framework 4.7.2
-EF 6
+- VS 2019 
+- .net framework 4.7.2
+- EF 6
