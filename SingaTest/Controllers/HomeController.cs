@@ -58,10 +58,10 @@ namespace SingaTest.Controllers
         /// Update new records from user input
         /// </summary>
         /// <param name="monthList">A list of rows of the table with the updated data</param>
-        
-        //[ValidateAntiForgeryToken]
-        [HandleError]
-        public virtual JsonResult UpdateMonthData(IEnumerable<DetailsView> monthList)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult UpdateMonthData(IEnumerable<DetailsView> monthList)
         {
             try
             {
@@ -91,9 +91,10 @@ namespace SingaTest.Controllers
             }
             catch (Exception ex)
             {
-                logger.Error("Error updating records", ex.ToString());
+                logger.Error("Error updating records" + ex.ToString());
+                return Json(new { result = "ERROR" });
             }
-            return Json("OK");
+            return Json(new { result = "OK"});
         } 
         #endregion
     }
