@@ -60,6 +60,7 @@ namespace SingaTest.Controllers
         /// <param name="monthList">A list of rows of the table with the updated data</param>
 
         [HttpPost]
+        [HandleError]
         [ValidateAntiForgeryToken]
         public JsonResult UpdateMonthData(IEnumerable<DetailsView> monthList)
         {

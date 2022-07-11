@@ -2,19 +2,23 @@
 
 @{
     ViewBag.Title = "Home Page";
-    
+
 }
 
 <hr />
 
 
 <p align="right">
+  
 
-    <button id="editBtn" onclick="editRows()">Edit</button>
-    <button id="saveBtn" onclick="saveData()" hidden>Save</button>
 </p>
 
+<label>  Parts Data </label>
+<button class="bg-primary" align="right" id="editBtn" onclick="editRows()">Edit</button>
+<button class="bg-danger" id="saveBtn" onclick="saveData()" hidden>Save</button>
 <hr />
+
+
 
 
 <table class="table table-bordered table-hover" id="datatable" border="1">
@@ -154,6 +158,7 @@
 
     }
 
+
     //gets all the cell values
     function findCellValues() {
 
@@ -199,12 +204,12 @@
     //Save data
     function saveData() {
 
-        
+
         findCellValues();
         manipulateData();
 
 
-        debugger;
+
         var form = $('#__AjaxAntiForgeryForm');
         var token = $('input[name="__RequestVerificationToken"]').val();
 
@@ -216,10 +221,20 @@
                 monthList: monthList
             },
             success: function (result) {
-                alert("Updated Succesfully!");
+                debugger;
+
+                if (result.result == "OK") {
+                    alert("Updated Succesfully!");
+
+                } else {
+                    alert("ERROR! Updating records");
+                }
 
                 $('#saveBtn').prop('hidden', true);
                 $('#editBtn').removeAttr('hidden');
+
+                $('.ActiveMonth').prop('disabled', true);
+
             },
             error: function () {
                 alert("ERROR! Updating records");
@@ -235,5 +250,19 @@
 <style>
     #th {
         text-align: center;
+    }
+
+    #editBtn {
+        float: right;
+        border: none;
+        padding: 5px 20px;
+        border-radius: 5px;
+    }
+
+    #saveBtn {
+        float: right;
+        border: none;
+        padding: 5px 20px;
+        border-radius: 5px;
     }
 </style>
