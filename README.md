@@ -1,5 +1,7 @@
 # SingaTest
 
+Data grid bulk crud using asp.net and jquery.
+
 1. Clone repo.
 2. Crate a local database on SQL server under the name “Bmwtest”
 3. Change the connectionstring on web.config according to you local machine.
